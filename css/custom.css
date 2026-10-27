@@ -1,0 +1,156 @@
+/* ===== 色票：黑 / 白 / 淺藍（參考：黑白卡片搭配淺藍灰藍）===== */
+:root {
+    --ink: #121211;
+    --paper: #ffffff;
+    --sky: #d8eefc;
+    --steel: #8fb4d1;
+}
+
+body { background: var(--paper); }
+
+/* 各區塊配色：白 → 黑 → 淺藍 → 黑 → 白 → 淺藍 */
+section.resume-section {
+    max-width: none;
+    background: var(--bg);
+    color: var(--muted);
+}
+section.resume-section .resume-section-content { max-width: 68rem; }
+
+#about      { --bg: var(--paper); --fg: var(--ink); --muted: #4a4b45; --accent: #3d6d92; --icon-bg: var(--ink); --icon-fg: var(--paper); }
+#experience { --bg: var(--ink);   --fg: var(--paper); --muted: #cfd1ca; --accent: var(--sky); --icon-bg: var(--sky); --icon-fg: var(--ink); }
+#education  { --bg: var(--sky);   --fg: var(--ink); --muted: #3a3b36; --accent: #2f5f86; --icon-bg: var(--ink); --icon-fg: var(--sky); }
+#skills     { --bg: var(--ink);   --fg: var(--paper); --muted: #cfd1ca; --accent: var(--sky); --icon-bg: var(--sky); --icon-fg: var(--ink); }
+#interests  { --bg: var(--paper); --fg: var(--ink); --muted: #4a4b45; --accent: #3d6d92; --icon-bg: var(--ink); --icon-fg: var(--paper); }
+#awards     { --bg: var(--sky);   --fg: var(--ink); --muted: #3a3b36; --accent: #2f5f86; --icon-bg: var(--ink); --icon-fg: var(--sky); }
+
+hr.m-0 { display: none; }
+
+section.resume-section h1,
+section.resume-section h2,
+section.resume-section h3,
+section.resume-section p.lead { color: var(--fg); }
+section.resume-section p,
+section.resume-section li { color: var(--muted); }
+section.resume-section .text-primary,
+section.resume-section .subheading,
+section.resume-section a { color: var(--accent) !important; }
+section.resume-section .subheading { font-weight: 700; }
+
+/* ===== 側欄 ===== */
+#sideNav {
+    background-color: var(--ink) !important;
+    border-right: 1px solid #45463f;
+}
+#sideNav .navbar-nav .nav-item .nav-link { color: rgba(255, 255, 255, 0.72); }
+#sideNav .navbar-nav .nav-item .nav-link:hover,
+#sideNav .navbar-nav .nav-item .nav-link.active { color: var(--sky); }
+#sideNav .navbar-brand .img-profile { border-color: var(--sky) !important; }
+
+/* ===== 社群圖示 ===== */
+.social-icons .social-icon {
+    background-color: var(--icon-bg);
+    color: var(--icon-fg);
+}
+.social-icons .social-icon:hover { background-color: var(--steel); color: var(--ink); }
+
+/* ===== 工具／興趣圖示 ===== */
+.tool-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2.5rem 0;
+}
+.tool-icons li { text-align: center; width: 5.5rem; }
+.tool-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border: 3px solid var(--accent);
+    border-radius: 0.75rem;
+    font-family: "Saira Extra Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 1.7rem;
+    line-height: 1;
+    color: var(--accent);
+    transition: background 0.2s, color 0.2s;
+}
+.tool-badge.small { font-size: 1.25rem; }
+.tool-icons li:hover .tool-badge { background: var(--accent); color: var(--bg); }
+.tool-label { display: block; margin-top: 0.4rem; font-size: 0.85rem; color: var(--muted); }
+
+.fa-ul .fa-li .fa-check { color: var(--accent); }
+
+/* ===== 互動：彈跳 ===== */
+@keyframes bounce-pop {
+    0%   { transform: translateY(0); }
+    30%  { transform: translateY(-12px); }
+    55%  { transform: translateY(0); }
+    75%  { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
+.tool-icons li:hover .tool-badge,
+.social-icons .social-icon:hover,
+.fa-ul li:hover .fa-li { animation: bounce-pop 0.6s ease; }
+
+#sideNav .navbar-nav .nav-item .nav-link { transition: transform 0.2s, color 0.2s; }
+#sideNav .navbar-nav .nav-item .nav-link:hover { transform: translateX(6px); }
+#sideNav .navbar-brand .img-profile { transition: transform 0.3s; }
+#sideNav .navbar-brand .img-profile:hover { transform: scale(1.06) rotate(-3deg); }
+
+/* 姓名逐字彈跳（由 js/interactions.js 拆字） */
+.char-bounce { display: inline-block; cursor: default; }
+.char-bounce:hover { animation: bounce-pop 0.6s ease; }
+
+/* 標題與經歷項目滑過時微位移 */
+section.resume-section h2 { transition: transform 0.25s; display: inline-block; }
+section.resume-section h2:hover { transform: translateX(8px); }
+#experience .d-flex.flex-column > .flex-grow-1,
+#education .d-flex.flex-column > .flex-grow-1 { transition: transform 0.25s; }
+#experience .d-flex.flex-column:hover > .flex-grow-1,
+#education .d-flex.flex-column:hover > .flex-grow-1 { transform: translateX(8px); }
+
+/* 捲動進場 */
+.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.js .reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    .js .reveal { opacity: 1; transform: none; }
+}
+
+/* ===== 首頁互動圖案 ===== */
+.shape-play { display: flex; align-items: flex-end; gap: 1.25rem; flex-wrap: wrap; }
+.shape {
+    --s: 3.5rem;
+    display: inline-block;
+    width: var(--s);
+    height: var(--s);
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s;
+}
+.shape-circle   { background: var(--ink); border-radius: 50%; }
+.shape-square   { background: var(--steel); border-radius: 0.6rem; }
+.shape-arch     { background: #a9cde8; border-radius: 999px 999px 0 0; height: 5rem; }
+.shape-triangle { background: var(--ink); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.shape-pill     { background: #3d6d92; border-radius: 999px; width: 6rem; height: 2.5rem; }
+.shape:hover { animation: bounce-pop 0.6s ease; }
+.shape.is-spun { transform: rotate(180deg) scale(1.15); }
+.shape-circle.is-spun,
+.shape-triangle.is-spun { background: #3d6d92; }
+.shape-square.is-spun,
+.shape-arch.is-spun,
+.shape-pill.is-spun { background: var(--ink); }
+
+/* ===== 大頭照：非正方形圖片以填滿裁切 ===== */
+#sideNav .navbar-brand .img-profile {
+    width: 10rem;
+    height: 10rem;
+    max-width: 10rem;
+    max-height: 10rem;
+    object-fit: cover;
+    object-position: center top;
+}
